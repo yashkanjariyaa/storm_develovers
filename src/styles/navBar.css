@@ -1,0 +1,49 @@
+:root{
+    --off-black : #18191b;
+    --off-white : #efefef;
+    --body-black : #24262b;
+    --black : #000;
+}
+*{
+    margin: 0;
+    padding : 0;
+}
+.navBar{
+    width: 100vw;
+    height: 70px;
+    display: block;
+    background-color: var(--black);
+    backdrop-filter: blur(0.8);
+}
+.navList{
+    list-style-type: none;
+    width: 100vw;
+}
+.link{
+    text-decoration: none;
+    color: var(--off-white);
+    padding: 15px;
+    margin: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+.link:hover{
+    text-decoration: underline;
+}
+.left, .right{
+    margin: 15px 0px;
+    padding : 5px;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+@media screen and (max-width : 500px){
+    .link{
+        font-size: 15px;
+        margin : 10px 0px;
+        text-align: center;
+    }
+}

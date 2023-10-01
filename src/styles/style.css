@@ -1,0 +1,17 @@
+*{
+    margin : 0;
+}
+body{
+    margin : 0;
+    position: relative;
+}
+#root{
+    background-image: linear-gradient(140deg, var(--black), var(--magic-green));
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top : 0;
+}
