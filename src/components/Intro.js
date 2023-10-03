@@ -11,6 +11,9 @@ export default function Intro() {
           facilisis mauris sit amet massa vitae tortor condimentum lacinia.
         </h2>
       </div>
+      <div className="moreText">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
     </div>
   );
 }

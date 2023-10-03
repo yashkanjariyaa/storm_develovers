@@ -2,7 +2,10 @@
     --off-black : #18191b;
     --off-white : #efefef;
     --body-black : #24262b;
+    --dark-blue : #090422;
+    --magic-green : #003121;
     --black : #000;
+    --primary-green : #44d2a2;
 }
 *{
     margin: 0;
@@ -21,7 +24,7 @@
 }
 .link{
     text-decoration: none;
-    color: var(--off-white);
+    color: var(--primary-green);
     padding: 15px;
     margin: 10px;
     font-size: 20px;

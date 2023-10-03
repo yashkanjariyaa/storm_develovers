@@ -4,6 +4,7 @@ import Home from './pages/home.js';
 import NoPage from './pages/noPage.js';
 import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
+import DashBoard from './pages/dashboard.js';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path = "*" element={<NoPage/>}/>
         <Route exact path = "/sign-in" element={<SignIn/>}/>
         <Route exact path = "/sign-up" element={<SignUp/>}/>
+        <Route exact path = "/dashboard" element={<DashBoard/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkGreentheme } from '../themes/darkGreen';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -27,15 +29,37 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  async function handleSubmit(event){
+    try{
+      event.preventDefault();
+      const response = await fetch('http://localhost:1337/api/login', {
+        method : 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      })
+      console.log(response);
+      const data = await response.json();
+      if(data.user){
+        localStorage.setItem('token', data.user);
+        localStorage.setItem('userEmail', data.user.email)
+        alert('Login Successful');
+        navigate('/dashboard');
+      }else{
+        alert('Please check your username and password');
+      }
+      console.log(data);
+    }catch(err){
+      console.log(err);
+    }
+  }   
   return (
     <ThemeProvider theme={darkGreentheme}>
       <Container component="main" maxWidth="xs">
@@ -64,6 +88,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(e)=>{setEmail(e.target.value)}}
             />
             <TextField
               margin="normal"
@@ -74,6 +100,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
