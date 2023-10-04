@@ -13,29 +13,45 @@ app.use(express.json());
 //user survey and feedback
 
 const surveyController = async (req, res) => {
-    const { employeeId } = req.params;
-    try {
-      const feedbackData = await feedBackSchema.find({ employeeId });
-      res.json(feedbackData);
-    } catch (error) {
-      res.status(500).json({ error: 'Error fetching survey data'});
+  try {
+    const feedbackData = await req.body.feedBackData;
+    if (feedbackData) {
+      await feedBackSchema.create({
+        employeeId: feedbackData.employeeId,
+        hygieneStatus: feedbackData.hygieneStatus,
+        colleagueStatus: feedbackData.colleagueStatus,
+        juniorStatus: feedbackData.juniorStatus,
+        seniorStatus: feedbackData.seniorStatus,
+        staffStatus: feedbackData.staffStatus,
+        parkingStatus: feedbackData.parkingStatus,
+        washRoomStatus: feedbackData.washRoomStatus,
+      });
+      res.json({ message: "successfully submitted" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching survey data" });
   }
 };
 
 const feedbackController = async (req, res) => {
-    const { employeeId } = req.params;
-    try {
-      const surveyData = await surveySchema.find({ employeeId });
-      res.json(surveyData);
-    } catch (error) {
-      res.status(500).json({ error: 'Error fetching feedback data'});
+  try {
+    const surveyData = await req.body.surveyData 
+    if(surveyData){
+      await surveySchema.create({
+        employeeId: surveyData.employeeId,
+        surveyQuestions : surveyData.surveyQuestions,
+        surveyAnswers : surveyData.surveyAnswers,
+        rateQuestions : surveyData.rateQuestions,
+        rateAnswers : surveyData.rateAnswers
+      });
+    }
+    res.json({message : 'successfully submitted'});
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching feedback data" });
   }
 };
 
-
-
 module.exports = {
-    surveyController,
-    feedbackController,
+  surveyController,
+  feedbackController,
 };
-  

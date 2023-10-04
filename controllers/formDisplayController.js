@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const formId = async (req, res) => {
+const formDisplay = async (req, res) => {
     const { formID } = req.params;
     try {
       const form = await feedbackAdmin.find({ formID });
@@ -19,5 +19,5 @@ const formId = async (req, res) => {
 };
 
 module.exports = {
-    formId,
+    formDisplay,
 };
