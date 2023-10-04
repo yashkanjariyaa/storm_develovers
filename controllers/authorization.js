@@ -49,12 +49,12 @@ const signIn = async (req, res) => {
 const check = async (req, res) => {
   try {
     const token = req.body.token;
-      const valid = await jwt.decode(token);
-      if (!valid) {
-        res.json({ status: "invalid" });
-      } else {
-        res.json({ status: "valid" });
-      }
+    const valid = await jwt.decode(token);
+    if (!valid) {
+      res.json({ status: "invalid" });
+    } else {
+      res.json({ status: "valid" });
+    }
   } catch (err) {
     console.log(err);
     res.json({ status: "error", error: err });
