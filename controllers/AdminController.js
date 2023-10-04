@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
-const feedbackSchema = require("../models/adminFeedBack");
-// const surveySchema = require("../models/admin")
+const feedbackSchema = require("../models/feedbackSchema");
+const surveySchema = require("../models/surveySchema");
 
 const app = express();
 app.use(cors());
