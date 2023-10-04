@@ -1,11 +1,42 @@
-import React from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Box from '@mui/material/Box';
 // import ProductivityChart from './components/chartComponents/ProductivityChart.js';
 // import Chart from '../components/chartComponents/RetentionChart.js';
 // import Chart from '../components/chartComponents/ParticipationChart.js';
 import Chart from '../components/chartComponents/ChartComponent';
+<<<<<<< HEAD
 // import footer from "../components/Footer";
 
+=======
+import { useNavigate } from 'react-router-dom';
+import Container from '@mui/material/Container';
+import { darkGreentheme } from '../themes/darkGreen';
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from '@emotion/react';
+import { useState } from 'react';
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 function EmpReview() {
+  const [productivity, setProductivity] = useState('');
+  const [retention, setRetention] = useState('');
+  const [participation, setParticipation] = useState('');
+  fetch('http://localhost:3000/api/KPIController')
+    .then((response)=>{
+      if(response){
+        console.log(response);
+        return response.json();
+      }
+    })
+    .then((data)=>{
+      setParticipation(data.participationRate);
+      setProductivity(data.productivity);
+      setRetention(data.retentionRate);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  const token = localStorage.getItem('token');
   // Sample data (replace with your actual data)
   const productivityData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -44,14 +75,65 @@ function EmpReview() {
       },
     ],
   };
-
+  const navigate = useNavigate();
+  async function check() {
+    try {
+      const response = await fetch("http://localhost:1337/api/check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+        }),
+      });
+      console.log(response);
+      const data = await response.json();
+      const validity = data.status;
+      if (!data.error) {
+        console.log(validity);
+        if (validity === "invalid") {
+          localStorage.removeItem("token");
+          navigate('/sign-in');
+        } else if (validity === "valid") {
+          console.log("user authenticated!");
+        } else {
+          console.log("error during authentification");
+        }
+      } else {
+        console.log(data.error);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  check();
   return (
+    <ThemeProvider  theme={darkGreentheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
     <div className="EmpReview">
       <h1>Employee Metrics</h1>
-      {/* <Chart data={productivityData} /> */}
       <Chart data={retentionData} />
-      {/* <Chart data={participationData} /> */}
+      <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& > *': {
+          m: 1,
+        },
+      }}
+    >
+      <ButtonGroup variant="outlined" aria-label="outlined button group">
+        <Button>One</Button>
+        <Button>Two</Button>
+        <Button>Three</Button>
+      </ButtonGroup>
+    </Box>
     </div>
+    </Container>
+    </ThemeProvider>
   );
 }
 

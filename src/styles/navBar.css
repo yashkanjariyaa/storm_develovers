@@ -17,17 +17,24 @@
     display: block;
     background-color: var(--black);
     backdrop-filter: blur(0.8);
+<<<<<<< HEAD
     margin-top: -18px;
+=======
+    position: absolute;
+    top : 0;
+    z-index : 1;
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 }
 .navList{
     list-style-type: none;
     width: 100vw;
+    margin: 0;
 }
 .link{
     text-decoration: none;
     color: var(--primary-green);
-    padding: 15px;
-    margin: 10px;
+    padding: 20px;
+    margin: 20px;
     font-size: 20px;
     text-align: center;
 }
