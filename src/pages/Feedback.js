@@ -42,7 +42,7 @@ export default function Feedback() {
         },
         body: JSON.stringify({ feedBackDataObj }),
       });
-
+      
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData.message);
