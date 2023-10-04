@@ -55,6 +55,7 @@ export default function SignUp() {
       body: JSON.stringify({
         name : formData.get('firstName')+formData.get('lastName'),
         email : formData.get('email'),
+        role : formData.get('role'),
         password : formData.get('password')
       }),
     });
@@ -125,6 +126,16 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="role"
+                  label="role"
+                  id="role"
+                  autoComplete="role"
                 />
               </Grid>
               <Grid item xs={12}>
