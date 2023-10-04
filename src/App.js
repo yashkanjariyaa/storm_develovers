@@ -8,14 +8,7 @@ import DashBoard from './pages/dashboard.js';
 import Feedback from './pages/Feedback.js';
 import EmpReview from './pages/EmpReview.js';
 import Survey from './pages/Survey.js';
-import Chart from 'chart.js/auto';
-import Footer from "./components/Footer";
-
-
-
-
 import Report from './pages/Report.js';
-import Survey from './pages/Survey.js';
 
 function App() {
   return (
@@ -26,14 +19,12 @@ function App() {
         <Route exact path="/sign-in" element={<SignIn />} />
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/dashboard" element={<DashBoard />} />
-        <Route exact path='/Chart' element={<Chart/>}/>
         <Route exact path='/feedback' element={<Feedback />}/>
         <Route exact path='/employeeReview' element={<EmpReview />}/>
         <Route exact path="/report" element={<Report/>}/>
         <Route exact path='/survey' element={<Survey/>}/>
       </Routes>
     </BrowserRouter>
-    <Footer/>
     </>
   );
 }

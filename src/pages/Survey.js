@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import AppBar from "../components/appBar";
 import "../styles/appbar.css";
-import AppBar from '../components/appBar';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkGreentheme } from '../themes/darkGreen';
 import CssBaseline from '@mui/material/CssBaseline';
