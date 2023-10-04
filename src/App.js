@@ -7,6 +7,7 @@ import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
 import Survey from './pages/Survey.js';
 import Feedback from './pages/Feedback.js';
+import Responses from './pages/Responses.js';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/dashboard" element={<DashBoard />} />
         <Route exact path='/Feedback' element={<Feedback />}/>
         <Route exact path= "/Survey" element={<Survey/>}/>
+        <Route exact path="/Repsonses" element={<Responses/>}/>
 
       </Routes>
     </BrowserRouter>
