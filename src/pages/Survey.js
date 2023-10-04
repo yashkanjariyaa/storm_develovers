@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import "../styles/Survey.css";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -16,6 +17,14 @@ import Container from '@mui/material/Container';
 
 
 export default function Survey() {
+    const [SurveyData, setSurveyData] = useState('');
+    const SurveyDataObj = {
+        employeeId: 1,          
+        surveyQuestions: [],
+        surveyAnswers: [],
+        rateQuestions: [],
+        rateAnswers: []
+    };
 
     const labels = {
         0.5: 'Useless',
@@ -29,6 +38,29 @@ export default function Survey() {
         4.5: 'Excellent',
         5: 'Excellent+',
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const response = await fetch(`http://localhost:3000/api/survey/123`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ SurveyDataObj }),
+          });
+    
+          if (response.ok) {
+            const responseData = await response.json();
+            console.log(responseData.message);
+          } else {
+            throw new Error('Error submitting survey');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     /*function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
