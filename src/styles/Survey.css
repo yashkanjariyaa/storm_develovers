@@ -1,0 +1,23 @@
+body,p{
+    color:whitesmoke;
+    font-size:25px;
+}
+#demo-radio-buttons-group-label
+{
+    color:whitesmoke;
+    font-size:25px;
+
+}
+.box
+{
+    position:absolute;
+    left:275px;    
+    display:flex;
+    justify-content: center;
+    height:max-content;
+    width:80vw;
+    color:whitesmoke;
+    background-color: black;
+    line-height: 50px;
+    padding:1%;
+}

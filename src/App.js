@@ -5,6 +5,7 @@ import NoPage from './pages/noPage.js';
 import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
+import Survey from './pages/Survey.js';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route exact path = "/sign-in" element={<SignIn/>}/>
         <Route exact path = "/sign-up" element={<SignUp/>}/>
         <Route exact path = "/dashboard" element={<DashBoard/>}/>
-      </Routes>
+        <Route exact path= "/Survey" element={<Survey/>}/></Routes>
     </BrowserRouter>
   );
 }
