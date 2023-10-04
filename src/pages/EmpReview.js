@@ -48,8 +48,8 @@ function EmpReview() {
     <div className="EmpReview">
       <h1>Employee Metrics</h1>
       {/* <Chart data={productivityData} /> */}
-      <Chart data={retentionData} />
-      {/* <Chart data={participationData} /> */}
+      {/* <Chart data={retentionData} /> */}
+      <Chart data={participationData} />
     </div>
   );
 }
