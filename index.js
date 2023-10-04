@@ -8,6 +8,8 @@ app.use(express.json());
 
 const port = 1337;
 
+const { surveyController, feedbackController } = require("./controllers/surveyAuthorization.js");
+
 const { signIn, signUp, check } = require("./controllers/authorization.js");
 
 app.use((req, res, next) => {
@@ -37,6 +39,10 @@ app.post("/api/login", signIn);
 app.post("/api/register", signUp);
 
 app.post("/api/check", check);
+
+app.post('/api/survey', surveyController);  //for server
+
+app.post('/api/feedback', feedbackController);  
 
 app.listen(port, () => {
   console.log("App is listening on " + port);
