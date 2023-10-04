@@ -20,6 +20,7 @@ function App() {
         <Route exact path="/dashboard" element={<DashBoard />} />
         <Route exact path='/Feedback' element={<Feedback />}/>
         <Route exact path='/EmpReview' element={<EmpReview />}/>
+        <Route exact path="/Repsonses" element={<Responses/>}/>
 
       </Routes>
     </BrowserRouter>
