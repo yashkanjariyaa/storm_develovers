@@ -13,13 +13,13 @@ app.use(express.json());
 
 const KPIController = async (req, res) =>{
     try{
-      const KPI = await KPI.find()
+      const employeeID = req.params;
+      const KPI = await KPI.find(employeeID)
       return res.status(200).json({KPI});
     }catch {
       return res.status(500).json({error:"Error"});
     }
   }
-
   module.exports = {
     KPIController,
   };

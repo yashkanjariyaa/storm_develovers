@@ -1,19 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
-
 const mongoose = require("mongoose");
+const surveyForm = require('../models/surveyFormSchema');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const questions = async (req, res) => {
+const surveyFormController = async (req, res) => {
     if (!req.body) {
       return res.status(400).json({ error: "Bad Request" });
     }
     try {
-      await userSchema.create({
+      await surveyForm.create({
         form_name: req.body.name,
         form_id: req.body.id,
         question: req.body.questionObject,
@@ -26,5 +26,5 @@ const questions = async (req, res) => {
   };
 
 module.exports = {
-    questions,
+    surveyFormController,
 };

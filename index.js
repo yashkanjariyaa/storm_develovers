@@ -11,8 +11,8 @@ const port = 1337;
 const { surveyController, feedbackController } = require("./controllers/surveyFeedbackController.js");
 const { feedbackAdminController } = require("./controllers/feedbackAdminController");
 const { KPIController } = require("./controllers/KPIs.js");
-const { questions } = require("./controllers/creationOfForms.js");
-const { formId } = require("./controllers/formID.js");
+const { surveyFormController } = require("./controllers/creationOfFormsController.js");
+const { formDisplay } = require("./controllers/formDisplayController.js");
 
 const { signIn, signUp, check } = require("./controllers/authorization.js");
 
@@ -52,9 +52,9 @@ app.post('/api/feedbackAdmin', feedbackAdminController);
 
 app.get('/api/KPIController', KPIController);
 
-app.post('/api/questions', questions);
+app.post('/api/questions', surveyController);
 
-app.get('/api/formId', formId);
+app.get('/api/formId', formDisplay);
 
 app.listen(port, () => {
   console.log("App is listening on " + port);
