@@ -17,6 +17,7 @@
     display: block;
     background-color: var(--black);
     backdrop-filter: blur(0.8);
+    margin-top: -18px;
 }
 .navList{
     list-style-type: none;

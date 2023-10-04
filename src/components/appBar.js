@@ -1,4 +1,5 @@
 import * as React from 'react';
+import "../styles/appbar.css";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,7 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import '../styles/appbar.css';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

@@ -1,6 +1,9 @@
 import React from "react";
 import AppBar from "../components/appBar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+
+
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");

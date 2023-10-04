@@ -6,6 +6,7 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { left } from '@popperjs/core';
 import AppBar from "../components/appBar";
+// import footer from "../components/Footer";
 
 export default function Feedback() {
 

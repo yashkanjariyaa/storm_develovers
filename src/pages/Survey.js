@@ -10,10 +10,13 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import AppBar from "../components/appBar";
+import "../styles/appbar.css";
 import { ThemeProvider } from '@mui/material/styles';
 import { darkGreentheme } from '../themes/darkGreen';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import Footer from '../components/Footer'
+
 
 
 export default function Survey() {
@@ -214,6 +217,7 @@ export default function Survey() {
                         )*/}
                     </Box>
                 </FormControl>
+                <Footer/>
             </div>
 
         </>

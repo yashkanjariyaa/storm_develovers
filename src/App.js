@@ -5,17 +5,20 @@ import NoPage from './pages/noPage.js';
 import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
-import Survey from './pages/Survey.js';
 import Feedback from './pages/Feedback.js';
-import Responses from './pages/Responses.js';
+import EmpReview from './pages/EmpReview.js';
+import Survey from './pages/Survey.js';
+import Chart from 'chart.js/auto';
+import Footer from "./components/Footer";
+
+
+
 
 
 function App() {
   return (
     <><BrowserRouter>
       <Routes>
-        
-       
         <Route exact path="/" element={<Home />} />
         <Route exact path="*" element={<NoPage />} />
         <Route exact path="/sign-in" element={<SignIn />} />
@@ -23,10 +26,13 @@ function App() {
         <Route exact path="/dashboard" element={<DashBoard />} />
         <Route exact path='/Feedback' element={<Feedback />}/>
         <Route exact path= "/Survey" element={<Survey/>}/>
-        <Route exact path="/Report" element={<Report/>}/>
+        <Route exact path='/EmpReview' element={<EmpReview />}/>
+        <Route exact path='/Chart' element={<Chart/>}/>
+        
 
       </Routes>
     </BrowserRouter>
+    <Footer/>
     </>
   );
 }
