@@ -1,11 +1,18 @@
 import React from "react";
 import AppBar from "../components/appBar";
+<<<<<<< HEAD
+import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+
+
+=======
 import "../styles/dashboard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext, ThemeProvider } from "@emotion/react";
 import Container from '@mui/material/Container';
 import { darkGreentheme } from '../themes/darkGreen';
 import { CssBaseline } from "@mui/material";
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");

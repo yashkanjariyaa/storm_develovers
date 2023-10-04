@@ -6,12 +6,17 @@ import Box from '@mui/material/Box';
 // import Chart from '../components/chartComponents/RetentionChart.js';
 // import Chart from '../components/chartComponents/ParticipationChart.js';
 import Chart from '../components/chartComponents/ChartComponent';
+<<<<<<< HEAD
+// import footer from "../components/Footer";
+
+=======
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { darkGreentheme } from '../themes/darkGreen';
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
 import { useState } from 'react';
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 function EmpReview() {
   const [productivity, setProductivity] = useState('');
   const [retention, setRetention] = useState('');

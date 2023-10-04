@@ -1,24 +1,35 @@
-import * as React from "react";
-import { useState } from "react";
-import "../styles/Survey.css";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
-import StarIcon from "@mui/icons-material/Star";
+import * as React from 'react';
+import { useState } from 'react';
+import '../styles/Survey.css';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+<<<<<<< HEAD
 import AppBar from "../components/appBar";
-import { ThemeProvider } from "@mui/material/styles";
-import { darkGreentheme } from "../themes/darkGreen";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-import { useNavigate } from "react-router-dom";
+import "../styles/appbar.css";
+=======
+import AppBar from '../components/appBar';
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
+import { ThemeProvider } from '@mui/material/styles';
+import { darkGreentheme } from '../themes/darkGreen';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+<<<<<<< HEAD
+import Footer from '../components/Footer'
+
+
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 
 export default function Survey() {
-  const [SurveyData, setSurveyData] = useState("");
-  const token = localStorage.getItem("token");
+  const [SurveyData, setSurveyData] = useState('');
+  const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const SurveyDataObj = {
     employeeId: 1,
@@ -29,23 +40,23 @@ export default function Survey() {
   };
 
   const labels = {
-    0.5: "Useless",
-    1: "Useless+",
-    1.5: "Poor",
-    2: "Poor+",
-    2.5: "Ok",
-    3: "Ok+",
-    3.5: "Good",
-    4: "Good+",
-    4.5: "Excellent",
-    5: "Excellent+",
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
   };
   async function check() {
     try {
-      const response = await fetch("http://localhost:1337/api/check", {
-        method: "POST",
+      const response = await fetch('http://localhost:1337/api/check', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           token,
@@ -56,13 +67,13 @@ export default function Survey() {
       const validity = data.status;
       if (!data.error) {
         console.log(validity);
-        if (validity === "invalid") {
-          localStorage.removeItem("token");
-          navigate("/sign-in");
-        } else if (validity === "valid") {
-          console.log("user authenticated!");
+        if (validity === 'invalid') {
+          localStorage.removeItem('token');
+          navigate('/sign-in');
+        } else if (validity === 'valid') {
+          console.log('user authenticated!');
         } else {
-          console.log("error during authentification");
+          console.log('error during authentification');
         }
       } else {
         console.log(data.error);
@@ -77,9 +88,9 @@ export default function Survey() {
 
     try {
       const response = await fetch(`http://localhost:3000/api/survey/123`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ SurveyDataObj }),
       });
@@ -88,7 +99,7 @@ export default function Survey() {
         const responseData = await response.json();
         console.log(responseData.message);
       } else {
-        throw new Error("Error submitting survey");
+        throw new Error('Error submitting survey');
       }
     } catch (error) {
       console.error(error);
@@ -119,6 +130,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -130,6 +143,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -141,6 +156,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -152,6 +169,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -163,6 +182,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -174,6 +195,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -185,6 +208,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -197,6 +222,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -209,6 +236,8 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -220,8 +249,8 @@ export default function Survey() {
           <Box
             sx={{
               width: 200,
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <Rating
@@ -249,8 +278,8 @@ export default function Survey() {
           <Box
             sx={{
               width: 200,
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <Rating
@@ -270,9 +299,19 @@ export default function Survey() {
             {/*elevenValue !== null && (
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
+<<<<<<< HEAD
+                    </Box>
+                </FormControl>
+                <Footer/>
+            </div>
+
+        </>
+    );
+=======
           </Box>
         </FormControl>
       </div>
     </>
   );
+>>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 }
