@@ -6,6 +6,7 @@ import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
 import Feedback from './pages/Feedback.js';
+import EmpReview from './pages/EmpReview.js';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/dashboard" element={<DashBoard />} />
         <Route exact path='/Feedback' element={<Feedback />}/>
+        <Route exact path='/EmpReview' element={<EmpReview />}/>
 
       </Routes>
     </BrowserRouter>
