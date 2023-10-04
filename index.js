@@ -8,7 +8,9 @@ app.use(express.json());
 
 const port = 1337;
 
-const { surveyController, feedbackController } = require("./controllers/surveyAuthorization.js");
+const { surveyController, feedbackController } = require("./controllers/surveyFeedbackController.js");
+const { feedbackAdminController } = require("./controllers/feedbackAdminController");
+const { KPIController } = require("./controllers/KPIs.js");
 
 const { signIn, signUp, check } = require("./controllers/authorization.js");
 
@@ -43,6 +45,10 @@ app.post("/api/check", check);
 app.post('/api/survey', surveyController);  //for server
 
 app.post('/api/feedback', feedbackController);  
+
+app.post('/api/feedbackAdmin', feedbackAdminController);
+
+app.get('/api/KPIController', KPIController);
 
 app.listen(port, () => {
   console.log("App is listening on " + port);
