@@ -11,9 +11,8 @@ body{
     background-position: top right;
     background-attachment: fixed;
     height: 150vh;
-    width: 100vw;
+    
     position: relative;
     top : 0;
-    overflow-y:none;
-    
+    overflow-y: hidden;
 }

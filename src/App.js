@@ -5,11 +5,10 @@ import NoPage from './pages/noPage.js';
 import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
-import Survey from './pages/Survey.js';
 import Feedback from './pages/Feedback.js';
-// import Responses from './pages/Responses.js';
-import EmpReview from './pages/EmpReview';
-
+import EmpReview from './pages/EmpReview.js';
+import Survey from './pages/Survey.js';
+import Report from './pages/Report.js';
 
 function App() {
   return (
@@ -22,11 +21,10 @@ function App() {
         <Route exact path="/sign-in" element={<SignIn />} />
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/dashboard" element={<DashBoard />} />
-        <Route exact path='/Feedback' element={<Feedback />}/>
-        <Route exact path= "/Survey" element={<Survey/>}/>
-        {/* <Route exact path="/Repsonses" element={<Responses/>}/> */}
-        <Route exact path="/EmpReview" element={<EmpReview />}/>
-
+        <Route exact path='/feedback' element={<Feedback />}/>
+        <Route exact path='/employeeReview' element={<EmpReview />}/>
+        <Route exact path="/report" element={<Report/>}/>
+        <Route exact path='/survey' element={<Survey/>}/>
       </Routes>
     </BrowserRouter>
     </>
