@@ -82,13 +82,13 @@ export default function Survey() {
                     <FormLabel id="demo-radio-buttons-group-label">Were you provided with clear expectations for your tasks and goals
                     </FormLabel>
 
-                    <RadioGroup
+                    <RadioGroup 
                         aria-labelledby="demo-radio-buttons-group-label"
                         defaultValue="Yes"
                         name="radio-buttons-group"
                     >
                         <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel value="No" control={<Radio />} label="No" />
+                        <FormControlLabel value="No"  control={<Radio />} label="No" />
                     </RadioGroup>
                     <FormLabel id="demo-radio-buttons-group-label">Did you receive constructive feedback on your performance?</FormLabel>
                     <RadioGroup
