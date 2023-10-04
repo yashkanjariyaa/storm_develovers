@@ -13,6 +13,7 @@ const signUp = async (req, res) => {
     await userSchema.create({
       name: req.body.name,
       email: req.body.email,
+      role : req.body.role,
       password: cryptedPassword,
     });
     res.json({ status: "ok" });
@@ -34,9 +35,10 @@ const signIn = async (req, res) => {
       req.body.password,
       user.password
     );
+    const role = user.role;
     if (isPasswordValid) {
       const token = jwt.sign({ email: user.email }, jwtkey);
-      return res.json({ status: "ok", user: token });
+      return res.json({ status: "ok", user: token, role : role });
     } else {
       return res.json({ status: "error", user: false });
     }
