@@ -6,16 +6,13 @@ import { styled } from "@mui/system";
 import clsx from "clsx";
 import { left } from "@popperjs/core";
 import AppBar from "../components/appBar";
-<<<<<<< HEAD
 // import footer from "../components/Footer";
 
-=======
 import { ThemeProvider } from "@mui/material/styles";
 import { darkGreentheme } from "../themes/darkGreen";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 export default function Feedback() {
   const token = localStorage.getItem("token");
   const [feedBackData, setFeedbackData] = useState("");
