@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/dashboard" element={<DashBoard />} />
         <Route exact path='/Feedback' element={<Feedback />}/>
         <Route exact path= "/Survey" element={<Survey/>}/>
-        <Route exact path="/Repsonses" element={<Responses/>}/>
+        <Route exact path="/Report" element={<Report/>}/>
 
       </Routes>
     </BrowserRouter>
