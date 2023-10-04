@@ -1,6 +1,11 @@
 import React from "react";
 import AppBar from "../components/appBar";
-import { useNavigate } from "react-router-dom";
+import "../styles/dashboard.css";
+import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext, ThemeProvider } from "@emotion/react";
+import Container from '@mui/material/Container';
+import { darkGreentheme } from '../themes/darkGreen';
+import { CssBaseline } from "@mui/material";
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");
@@ -37,5 +42,18 @@ export default function Dashboard() {
     }
   }
   check();
-  return <AppBar />;
+  return (
+    <>
+      <ThemeProvider theme={darkGreentheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+      <AppBar />
+       <div className="list">
+          <Link to="/feedback" className="formLink">Feedback</Link><br></br>
+          <Link to="/survey" className="formLink">Survey</Link>
+       </div>
+       </Container>
+      </ThemeProvider>
+    </>
+    );
 }
