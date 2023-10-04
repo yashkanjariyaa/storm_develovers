@@ -3,6 +3,7 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const feedbackSchema = require("../models/adminFeedBack");
+// const surveySchema = require("../models/admin")
 
 const app = express();
 app.use(cors());
@@ -20,7 +21,20 @@ const feedbackAdminController = async (req, res) => {
       res.status(500).json({ error: 'Error fetching feedbackAdmin data'});
   }
 };
+const surveyAdminController = async (req, res) => {
+  const { employeeId } = req.params;
+  try {
+    if(!employeeId){
+      const surveyAdmin = await surveySchema.find();
+    }
+    const surveyAdmin = await surveySchema.find({ employeeId });
+    res.json(surveyAdmin);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching surveyAdmin data'});
+}
+};
 
 module.exports = {
     feedbackAdminController,
-}
+    surveyAdminController,
+};

@@ -9,12 +9,15 @@ app.use(express.json());
 const port = 1337;
 
 const { surveyController, feedbackController } = require("./controllers/surveyFeedbackController.js");
-const { feedbackAdminController } = require("./controllers/feedbackAdminController");
+const { feedbackAdminController, surveyAdminController } = require("./controllers/AdminController.js");
 const { KPIController } = require("./controllers/KPIs.js");
 const { surveyFormController } = require("./controllers/creationOfFormsController.js");
 const { formDisplay } = require("./controllers/formDisplayController.js");
 
 const { signIn, signUp, check } = require("./controllers/authorization.js");
+const { serverRecieveFeedback } = require("./controllers/serverRecieveFeedback.js");
+const { employeeRecieveFeedback } = require("./controllers/employeeRecieveFeedback.js");
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -50,11 +53,18 @@ app.post('/api/feedback', feedbackController);
 
 app.post('/api/feedbackAdmin', feedbackAdminController);
 
+app.post('/api/surveyAdmin', surveyAdminController);
+
 app.get('/api/KPIController', KPIController);
 
 app.post('/api/questions', surveyController);
 
 app.get('/api/formId', formDisplay);
+
+app.get('/api/serverRecieveFeedback', serverRecieveFeedback);
+
+app.get('/api/employeeRecieveFeedback', employeeRecieveFeedback);
+
 
 app.listen(port, () => {
   console.log("App is listening on " + port);

@@ -8,8 +8,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+const serverRecieveFeedback = async(req, res) => {
+    const feedback = req.body.feedback;
+    
+    res.json({ message: 'Feedback received successfully!' });
+  };
 
 module.exports = {
-    adminFeedback,
+    serverRecieveFeedback,
 };
