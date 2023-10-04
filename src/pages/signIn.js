@@ -15,7 +15,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { darkGreentheme } from "../themes/darkGreen";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { AltRoute, RollerShades } from "@mui/icons-material";
 function Copyright(props) {
   return (
     <Typography
@@ -64,7 +63,8 @@ export default function SignIn() {
         console.log(data);
         if (data.user) {
           localStorage.setItem("token", data.user);
-          localStorage.setItem("userEmail", data.user.email);
+          localStorage.setItem("userEmployeeId", data.employeeId);
+          localStorage.setItem("employeeRole", data.role);
           alert("Login Successful");
           if(data.role === role){
             if (role.toLowerCase() === "admin") {
