@@ -5,6 +5,7 @@ import { Input, inputClasses } from '@mui/base/Input';
 import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { left } from '@popperjs/core';
+import AppBar from "../components/appBar";
 
 export default function Feedback() {
 
@@ -22,13 +23,15 @@ export default function Feedback() {
     };
 
   const containerStyle = {
-    marginTop: '130px',
+    
+    marginTop: '10px',
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'black',
     borderRadius: '20px',
+    padding:'5%'
   };
 
   const handleSubmit = async (e) => {
