@@ -5,18 +5,23 @@ import NoPage from './pages/noPage.js';
 import SignIn from './pages/signIn.js';
 import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
+import Feedback from './pages/Feedback.js';
+
 
 function App() {
   return (
-    <BrowserRouter>
+    <><BrowserRouter>
       <Routes>
-        <Route exact path = "/" element={<Home/>}/>
-        <Route exact path = "*" element={<NoPage/>}/>
-        <Route exact path = "/sign-in" element={<SignIn/>}/>
-        <Route exact path = "/sign-up" element={<SignUp/>}/>
-        <Route exact path = "/dashboard" element={<DashBoard/>}/>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="*" element={<NoPage />} />
+        <Route exact path="/sign-in" element={<SignIn />} />
+        <Route exact path="/sign-up" element={<SignUp />} />
+        <Route exact path="/dashboard" element={<DashBoard />} />
+        <Route exact path='/Feedback' element={<Feedback />}/>
+
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
