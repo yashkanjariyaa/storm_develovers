@@ -9,23 +9,17 @@ import FormLabel from '@mui/material/FormLabel';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
-<<<<<<< HEAD
 import AppBar from "../components/appBar";
 import "../styles/appbar.css";
-=======
 import AppBar from '../components/appBar';
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 import { ThemeProvider } from '@mui/material/styles';
 import { darkGreentheme } from '../themes/darkGreen';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-<<<<<<< HEAD
 import Footer from '../components/Footer'
 
 
-=======
 import { useNavigate } from 'react-router-dom';
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 
 export default function Survey() {
   const [SurveyData, setSurveyData] = useState('');
@@ -299,7 +293,6 @@ export default function Survey() {
             {/*elevenValue !== null && (
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
-<<<<<<< HEAD
                     </Box>
                 </FormControl>
                 <Footer/>
@@ -307,11 +300,4 @@ export default function Survey() {
 
         </>
     );
-=======
-          </Box>
-        </FormControl>
-      </div>
-    </>
-  );
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 }

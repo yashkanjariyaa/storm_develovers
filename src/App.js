@@ -7,7 +7,6 @@ import SignUp from './pages/signUp.js';
 import DashBoard from './pages/dashboard.js';
 import Feedback from './pages/Feedback.js';
 import EmpReview from './pages/EmpReview.js';
-<<<<<<< HEAD
 import Survey from './pages/Survey.js';
 import Chart from 'chart.js/auto';
 import Footer from "./components/Footer";
@@ -15,10 +14,8 @@ import Footer from "./components/Footer";
 
 
 
-=======
 import Report from './pages/Report.js';
 import Survey from './pages/Survey.js';
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
 
 function App() {
   return (
@@ -29,19 +26,11 @@ function App() {
         <Route exact path="/sign-in" element={<SignIn />} />
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/dashboard" element={<DashBoard />} />
-<<<<<<< HEAD
-        <Route exact path='/Feedback' element={<Feedback />}/>
-        <Route exact path= "/Survey" element={<Survey/>}/>
-        <Route exact path='/EmpReview' element={<EmpReview />}/>
         <Route exact path='/Chart' element={<Chart/>}/>
-        
-
-=======
         <Route exact path='/feedback' element={<Feedback />}/>
         <Route exact path='/employeeReview' element={<EmpReview />}/>
         <Route exact path="/report" element={<Report/>}/>
         <Route exact path='/survey' element={<Survey/>}/>
->>>>>>> 6fbca15bef617fe1e109649f8a6c460495e2448d
       </Routes>
     </BrowserRouter>
     <Footer/>
