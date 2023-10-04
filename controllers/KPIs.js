@@ -13,7 +13,7 @@ app.use(express.json());
 
 const KPIController = async (req, res) =>{
     try{
-      const KPI = await symptoms.find()
+      const KPI = await KPI.find()
       return res.status(200).json({KPI});
     }catch {
       return res.status(500).json({error:"Error"});
