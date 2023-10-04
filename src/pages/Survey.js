@@ -1,55 +1,67 @@
-import * as React from 'react';
-import { useState } from 'react';
-import '../styles/Survey.css';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
-import StarIcon from '@mui/icons-material/Star';
+import * as React from "react";
+import { useState } from "react";
+import "../styles/Survey.css";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
+import StarIcon from "@mui/icons-material/Star";
 import AppBar from "../components/appBar";
 import "../styles/appbar.css";
-import { ThemeProvider } from '@mui/material/styles';
-import { darkGreentheme } from '../themes/darkGreen';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Footer from '../components/Footer'
+import { ThemeProvider } from "@mui/material/styles";
+import { darkGreentheme } from "../themes/darkGreen";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import Footer from "../components/Footer";
+import Button from "@mui/material/Button";
 
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Survey() {
-  const [SurveyData, setSurveyData] = useState('');
-  const token = localStorage.getItem('token');
+  const [tenValue, setTenValue] = React.useState(4.5);
+  const [elevenValue, setElevenValue] = React.useState(4.5);
+  const [hover, setHover] = React.useState(-1);
+  const [surveyAnswers, setSurveyAnswers] = useState([]);
+  const [rateAnswers, setRateAnswers] = useState([]);
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const SurveyDataObj = {
-    employeeId: 1,
-    surveyQuestions: [],
-    surveyAnswers: [],
-    rateQuestions: [],
-    rateAnswers: [],
+    employeeId: localStorage.getItem("employeeId"),
+    surveyAnswers: surveyAnswers,
+    rateAnswers: rateAnswers,
   };
 
   const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
+    0.5: "Useless",
+    1: "Useless+",
+    1.5: "Poor",
+    2: "Poor+",
+    2.5: "Ok",
+    3: "Ok+",
+    3.5: "Good",
+    4: "Good+",
+    4.5: "Excellent",
+    5: "Excellent+",
   };
+
+  const addValueAtIndex = (value, index) => {
+    // Create a copy of the current array
+    const newSurveyAnswers = [...surveyAnswers];
+    // Insert the value at the specified index
+    newSurveyAnswers.splice(index, 0, value);
+    // Update the state with the new array
+    setSurveyAnswers(newSurveyAnswers);
+  };
+
   async function check() {
     try {
-      const response = await fetch('http://localhost:1337/api/check', {
-        method: 'POST',
+      const response = await fetch("http://localhost:1337/api/check", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           token,
@@ -60,13 +72,13 @@ export default function Survey() {
       const validity = data.status;
       if (!data.error) {
         console.log(validity);
-        if (validity === 'invalid') {
-          localStorage.removeItem('token');
-          navigate('/sign-in');
-        } else if (validity === 'valid') {
-          console.log('user authenticated!');
+        if (validity === "invalid") {
+          localStorage.removeItem("token");
+          navigate("/sign-in");
+        } else if (validity === "valid") {
+          console.log("user authenticated!");
         } else {
-          console.log('error during authentification');
+          console.log("error during authentification");
         }
       } else {
         console.log(data.error);
@@ -78,33 +90,33 @@ export default function Survey() {
   check();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch(`http://localhost:3000/api/survey/123`, {
-        method: 'POST',
+        setRateAnswers({
+            tenValue : tenValue,
+            elevenValue : elevenValue
+        })
+      const response = await fetch(`http://localhost:1337/api/survey`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ SurveyDataObj }),
+        body: JSON.stringify(SurveyDataObj),
       });
-
+      const data = await response.json();
+      console.log(data);
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData.message);
       } else {
-        throw new Error('Error submitting survey');
+        throw new Error("Error submitting survey");
       }
     } catch (error) {
       console.error(error);
     }
   };
-
   /*function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }*/
-  const [tenValue, setTenValue] = React.useState(4.5);
-  const [elevenValue, setElevenValue] = React.useState(4.5);
-  const [hover, setHover] = React.useState(-1);
   return (
     <>
       <ThemeProvider theme={darkGreentheme}>
@@ -123,8 +135,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 0);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -136,8 +150,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 1);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -149,8 +165,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 2);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -162,8 +180,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 3);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -175,8 +195,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 4);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -188,8 +210,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 5);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -201,8 +225,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 6);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -215,8 +241,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 7);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -229,8 +257,10 @@ export default function Survey() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            //value={temp}
+            onChange={(e) => {
+              addValueAtIndex(e.target.value, 8);
+            }}
           >
             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -242,16 +272,16 @@ export default function Survey() {
           <Box
             sx={{
               width: 200,
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
             }}
           >
             <Rating
               name="hover-feedback"
               value={tenValue}
               precision={0.5}
-              onChange={(event, newValue) => {
-                setTenValue(newValue);
+              onChange={(e) => {
+                setTenValue(e.target.value);
               }}
               onChangeActive={(event, newHover) => {
                 setHover(newHover);
@@ -271,16 +301,16 @@ export default function Survey() {
           <Box
             sx={{
               width: 200,
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
             }}
           >
             <Rating
               name="hover-feedback"
               value={elevenValue}
               precision={0.5}
-              onChange={(event, newValue) => {
-                setElevenValue(newValue);
+              onChange={(e) => {
+                setElevenValue(e.target.value);
               }}
               onChangeActive={(event, newHover) => {
                 setHover(newHover);
@@ -289,14 +319,17 @@ export default function Survey() {
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
             />
-            {/*elevenValue !== null && (
+            {/*elevenValue !== null && (`
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
-                    </Box>
-                </FormControl>
-                <Footer/>
-            </div>
 
-        </>
-    );
+            <Button variant="outlined" onClick={handleSubmit}>
+              Outlined
+            </Button>
+          </Box>
+        </FormControl>
+        <Footer />
+      </div>
+    </>
+  );
 }
