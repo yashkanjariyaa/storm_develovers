@@ -9,6 +9,8 @@ import Feedback from './pages/Feedback.js';
 import EmpReview from './pages/EmpReview.js';
 import Survey from './pages/Survey.js';
 import Report from './pages/Report.js';
+import FormBuilder from './components/FormBuilder';
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route exact path='/employeeReview' element={<EmpReview />}/>
         <Route exact path="/report" element={<Report/>}/>
         <Route exact path='/survey' element={<Survey/>}/>
+        <Route exact path='/FormBuilder' element={<FormBuilder/>}/>
       </Routes>
     </BrowserRouter>
     </>
