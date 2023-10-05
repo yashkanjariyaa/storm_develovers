@@ -38,7 +38,7 @@ const surveyController = async (req, res) => {
     res.json({message : 'successfully submitted'});
   } catch (error) {
     res.status(500).json({ message : "Error fetching survey data", err : error});
-    console.log(error);
+    console.log(error); 
   }
 };
 

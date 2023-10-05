@@ -26,5 +26,5 @@ const surveyFormController = async (req, res) => {
   };
 
 module.exports = {
-    surveyFormController,
+    surveyFormController
 };

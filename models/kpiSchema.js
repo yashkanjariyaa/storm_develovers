@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const User = new Schema(
     {
-        employeeId : { type : Number, unique : true },
+        employeeId : { type : String, unique : true },
         participationRate : { type : Number, required : true },
         productivity : { type : Number },
         retentionRate : { type : Number }
