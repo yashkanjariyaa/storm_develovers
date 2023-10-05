@@ -59,7 +59,7 @@ app.get('/api/KPIController', KPIController);
 
 app.post('/api/questions', surveyController);
 
-app.get('/api/formId', formDisplay);
+app.get('/api/formDisplay', formDisplay);
 
 app.get('/api/serverRecieveFeedback', serverRecieveFeedback);
 
