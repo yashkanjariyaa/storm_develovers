@@ -328,15 +328,11 @@ export default function Survey() {
               {/*elevenValue !== null && (`
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
-            </Box>
-            <Button variant="outlined" type="submit" onClick={(e)=>{handleSubmit(e)}}>
-              Submit
-            </Button>
-            </form>
-          </FormControl>
-        
-        <Footer />
-      </div>
-    </>
-  );
+                    </Box>
+                    </form>
+                </FormControl>
+                <Footer/>
+            </div>
+        </>
+    );
 }

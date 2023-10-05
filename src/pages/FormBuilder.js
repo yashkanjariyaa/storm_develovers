@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 function FormBuilder() {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState('');
+  const [formId, setFormId] = useState('');
+  const [formName, setFormName] = useState('');
+
+
 
   const handleQuestionChange = (e) => {
     setNewQuestion(e.target.value);
@@ -30,7 +34,31 @@ function FormBuilder() {
       </div>
     ));
   };
-
+  async function handleSubmit(){
+    try {
+      const response = await fetch("http://localhost:3000/api/formId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          questions,
+          formId,
+          formName,
+        }),
+      });
+      
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData.message);
+      } else {
+        throw new Error("Error creating forms");
+      }
+    } catch (error) {
+      console.error(error);
+    }  
+  }
+  
   return (
     <div>
       <h1>Enter the questions to be asked:</h1>
@@ -49,6 +77,6 @@ function FormBuilder() {
       </div>
     </div>
   );
-}
+};
 
 export default FormBuilder;
