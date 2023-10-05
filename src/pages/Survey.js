@@ -24,7 +24,7 @@ export default function Survey() {
   const [tenValue, setTenValue] = React.useState(4.5);
   const [elevenValue, setElevenValue] = React.useState(4.5);
   const [hover, setHover] = React.useState(-1);
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState("");
   const [surveyAnswers, setSurveyAnswers] = useState([]);
   const [rateAnswers, setRateAnswers] = useState([]);
   const token = localStorage.getItem("token");
@@ -88,16 +88,17 @@ export default function Survey() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('handling submit')
+    console.log("handling submit");
     setRateAnswers({
-        tenvalue : tenValue,
-        elevenValue : elevenValue
+      tenvalue: tenValue,
+      elevenValue: elevenValue,
     });
     const SurveyDataObj = {
-        employeeId: localStorage.getItem("userEmployeeId"),
-        surveyAnswers: surveyAnswers,
-        rateAnswers: rateAnswers,
-      };
+      employeeEmail: localStorage.getItem("employeeEmail"),
+      employeeId: localStorage.getItem("userEmployeeId"),
+      surveyAnswers: surveyAnswers,
+      rateAnswers: rateAnswers,
+    };
     console.log(SurveyDataObj);
     try {
       const response = await fetch("http://localhost:1337/api/survey", {
@@ -108,11 +109,10 @@ export default function Survey() {
         body: JSON.stringify(SurveyDataObj),
       });
       console.log(response);
-      if (response.status === 200) {
-        const responseData = await response.json();
-        console.log(responseData.message);
-      } else {
-        throw new Error("Error submitting survey");
+      const responseData = await response.json();
+      console.log(responseData.message);
+      if(responseData.status){
+        alert('Form already submitted' + ' '+ response.status);
       }
     } catch (error) {
       console.error(error);
@@ -131,8 +131,8 @@ export default function Survey() {
         </Container>
       </ThemeProvider>
       <div className="box">
-          <FormControl>
-        <form>
+        <FormControl>
+          <form>
             <FormLabel id="demo-radio-buttons-group-label">
               Were you provided with clear expectations for your tasks and goals
             </FormLabel>
@@ -141,7 +141,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 0);
               }}
@@ -156,7 +155,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 1);
               }}
@@ -171,7 +169,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 2);
               }}
@@ -200,7 +197,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 4);
               }}
@@ -215,7 +211,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 5);
               }}
@@ -230,7 +225,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 6);
               }}
@@ -246,7 +240,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 7);
               }}
@@ -262,7 +255,6 @@ export default function Survey() {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Yes"
               name="radio-buttons-group"
-              
               onChange={(e) => {
                 addValueAtIndex(e.target.value, 8);
               }}
@@ -328,11 +320,20 @@ export default function Survey() {
               {/*elevenValue !== null && (`
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
-                    </Box>
-                    </form>
-                </FormControl>
-                <Footer/>
-            </div>
-        </>
-    );
+            </Box>
+
+            <Button
+              variant="outlined"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              Submit
+            </Button>
+          </form>
+        </FormControl>
+        <Footer />
+      </div>
+    </>
+  );
 }
