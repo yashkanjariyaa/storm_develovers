@@ -36,9 +36,10 @@ const signIn = async (req, res) => {
       user.password
     );
     const role = user.role;
+    const employeeId = user._id;
     if (isPasswordValid) {
       const token = jwt.sign({ email: user.email }, jwtkey);
-      return res.json({ status: "ok", user: token, role : role });
+      return res.json({ status: "ok", user: token, role : role, employeeId : employeeId });
     } else {
       return res.json({ status: "error", user: false });
     }

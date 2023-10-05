@@ -8,5 +8,5 @@ const User = new Schema(
         retentionRate : { type : Number }
 
     });
-const model = mongoose.model('adminFeedBack',User);
+const model = mongoose.model('KPISchema',User);
 module.exports = model;

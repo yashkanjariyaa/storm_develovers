@@ -2,18 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const User = new Schema(
     {
-        employeeId : { type : Number, unique : true },
-        one : { type : Number, unique : true },
-        two : {  type : Number, unique : true },
-        three : { type : Boolean, unique : true },
-        four : { type : Boolean, unique : true },
-        five : { type : Boolean, unique : true },
-        six : { type : Boolean, unique : true },
-        seven : { type : Boolean, unique : true },
-        eight : { type : Boolean, unique : true },
-        nine : { type : Boolean, unique : true },
-        ten : { type : Boolean, unique : true },
-        eleven : { type : Boolean, unique : true }
+        employeeId : { type : String, unique : true },
+        surveyAnswers : { type : Array, 
+            items : { type : String}
+        },
+        rateAnswers : { type : Array, 
+            items : { type : Number}
+        }
     });
-const model = mongoose.model('surveySchema',User);
+const model = mongoose.model('surveyData', User);
 module.exports = model;

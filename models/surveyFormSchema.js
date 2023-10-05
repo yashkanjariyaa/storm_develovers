@@ -11,5 +11,5 @@ const User = new Schema(
             }
         }
     });
-const model = mongoose.model('surveyForms',User);
+const model = mongoose.model('surveyFormsData',User);
 module.exports = model;

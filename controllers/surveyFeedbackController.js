@@ -12,42 +12,33 @@ app.use(express.json());
 
 //user survey and feedback
 
-const surveyController = async (req, res) => {
+const feedbackController = async (req, res) => {
   try {
-    const feedbackData = await req.body.feedBackData;
-    if (feedbackData) {
+    const employeeId = await req.body.employeeId;
+    const text = await req.body.text;
       await feedBackSchema.create({
-        employeeId: feedbackData.employeeId,
-        hygieneStatus: feedbackData.hygieneStatus,
-        colleagueStatus: feedbackData.colleagueStatus,
-        juniorStatus: feedbackData.juniorStatus,
-        seniorStatus: feedbackData.seniorStatus,
-        staffStatus: feedbackData.staffStatus,
-        parkingStatus: feedbackData.parkingStatus,
-        washRoomStatus: feedbackData.washRoomStatus,
+        employeeId: employeeId,
+        text : text
       });
-      res.json({ message: "successfully submitted" });
-    }
+      res.status(200).json({ message: "successfully submitted" });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching survey data" });
+    res.status(500).json({ message : "Error fetching feedback data"});
+    console.log(error);
   }
 };
 
-const feedbackController = async (req, res) => {
+const surveyController = async (req, res) => {
   try {
-    const surveyData = await req.body.surveyData 
-    if(surveyData){
+    const surveyData = await req.body;
       await surveySchema.create({
-        employeeId: surveyData.employeeId,
-        surveyQuestions : surveyData.surveyQuestions,
+        employeeId: surveyData.employeeId || 'anonymous',
         surveyAnswers : surveyData.surveyAnswers,
-        rateQuestions : surveyData.rateQuestions,
         rateAnswers : surveyData.rateAnswers
       });
-    }
     res.json({message : 'successfully submitted'});
   } catch (error) {
-    res.status(500).json({ error: "Error fetching feedback data" });
+    res.status(500).json({ message : "Error fetching survey data", err : error});
+    console.log(error);
   }
 };
 

@@ -49,7 +49,7 @@ app.post("/api/check", check);
 
 app.post('/api/survey', surveyController);  //for server
 
-app.post('/api/feedback', feedbackController);  
+app.post('/api/feedback', feedbackController);  //for feedback
 
 app.post('/api/feedbackAdmin', feedbackAdminController);
 
@@ -64,6 +64,8 @@ app.get('/api/formId', formDisplay);
 app.get('/api/serverRecieveFeedback', serverRecieveFeedback);
 
 app.get('/api/employeeRecieveFeedback', employeeRecieveFeedback);
+
+app.post('/api/surveySubmit',surveyController)
 
 
 app.listen(port, () => {
