@@ -105,7 +105,7 @@ const randomData = Array.from({ length: 30 }, () => Math.floor(Math.random() * 1
 
   return (
     <ThemeProvider theme={darkGreentheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xl">
         <CssBaseline />
         <div className="EmpReview">
           <h1>Employee Metrics</h1>
