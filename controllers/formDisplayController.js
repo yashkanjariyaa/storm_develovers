@@ -11,7 +11,7 @@ app.use(express.json());
 const formDisplay = async (req, res) => {
     const { formID } = req.params;
     try {
-      const form = await feedbackAdmin.find({ formID });
+      const form = await form.find({ formID });
       res.json(form);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching form data'});
