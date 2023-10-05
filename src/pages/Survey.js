@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-import * as React from 'react';
-import { useState } from 'react';
-import '../styles/Survey.css';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
-import StarIcon from '@mui/icons-material/Star';
-import AppBar from "../components/appBar";
-import "../styles/appbar.css";
-import AppBar from '../components/appBar';
-import { ThemeProvider } from '@mui/material/styles';
-import { darkGreentheme } from '../themes/darkGreen';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Footer from '../components/Footer'
-
-
-import { useNavigate } from 'react-router-dom';
-=======
 import * as React from "react";
 import { useState } from "react";
 import "../styles/Survey.css";
@@ -43,7 +19,6 @@ import Footer from "../components/Footer";
 import Button from "@mui/material/Button";
 
 import { useNavigate } from "react-router-dom";
->>>>>>> 0724687bc2d860ddbaa59498ed33e62982d5381c
 
 export default function Survey() {
   const [tenValue, setTenValue] = React.useState(4.5);
