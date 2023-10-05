@@ -130,9 +130,7 @@ export default function Survey() {
       <div className="box">
         <FormControl>
           <form>
-            <FormLabel id="demo-radio-buttons-group-label">
-              Were you provided with clear expectations for your tasks and goals
-            </FormLabel>
+            
             <div className="ques" >
               <FormLabel id="demo-radio-buttons-group-label">
                 Were you provided with clear expectations for your tasks and
@@ -150,17 +148,6 @@ export default function Survey() {
               <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
               <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="Yes"
-                name="radio-buttons-group"
-                onChange={(e) => {
-                  addValueAtIndex(e.target.value, 0);
-                }}
-              >
-                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="No" control={<Radio />} label="No" />
-              </RadioGroup>
             </div>
 
             <div className="ques" >
@@ -178,6 +165,9 @@ export default function Survey() {
               <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
               <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
+            </div>
+
+            <div className="ques">
             <FormLabel id="demo-radio-buttons-group-label">
               Do you feel comfortable providing feedback to your supervisor?
             </FormLabel>

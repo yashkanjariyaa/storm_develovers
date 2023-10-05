@@ -1,0 +1,43 @@
+.formbuilder{
+    /* font-size: 30px; */
+    display: block;
+    /*justify-content: center;
+    flex-direction: column; */
+    margin-left: auto;
+   /* margin-right: 20px;
+    margin-top: 20px; */
+    /* margin: 20px; */
+    margin-right: auto;
+    margin-top: 40px;
+    padding: 3%;
+    /* border: 2px solid red; */
+    width: 90%;
+    background-color: black;
+    border-radius:40px ;
+}
+.title{
+    font-size: 2rem;
+    /* border: 2px dotted green; */
+    box-sizing: border-box;
+    padding: 4rem;
+}
+.inp{
+    padding: 4rem;
+    /* border: 2px dotted green; */
+    box-sizing: border-box;
+}
+.inp_area{
+    min-width: 500px;
+    min-height: 80px;
+    font-size: 2rem;
+}
+.btn{
+    /* border: 2px dotted green; */
+    box-sizing: border-box;
+    padding: 20px;
+}
+.preview{
+    padding: 4rem;
+    /* border: 2px dotted green; */
+    box-sizing: border-box;
+}
