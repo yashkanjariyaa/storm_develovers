@@ -22,7 +22,8 @@ export default function adminSurvey(){
   
   getFormData('123');
   return(
-    
+    <>
+    hello</>
   )
 }
 
