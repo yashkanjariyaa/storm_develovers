@@ -4,7 +4,6 @@ import { FormControl, useFormControlContext } from "@mui/base/FormControl";
 import { Input, inputClasses } from "@mui/base/Input";
 import { styled } from "@mui/system";
 import clsx from "clsx";
-import { left } from "@popperjs/core";
 import AppBar from "../components/appBar";
 // import footer from "../components/Footer";
 
@@ -16,6 +15,14 @@ import { useNavigate } from "react-router-dom";
 export default function Feedback() {
   const token = localStorage.getItem("token");
   const [feedBackData, setFeedbackData] = useState("");
+  const [washroomStatus, setWashroomStatus] = useState("");
+  const [hygieneStatus, setHygieneStatus] = useState("");
+  const [colleagueStatus, setColleagueStatus] = useState("");
+  const [juniorStatus, setJuniorStatus] = useState("");
+  const [seniorStatus, setSeniorStatus] = useState("");
+  const [staffStatus, setStaffStatus] = useState("");
+  const [parkingStatus, setParkingStatus] = useState("");
+  const employeeId = localStorage.getItem('employeeId')
 
   const feedBackDataObj = {
     employeeId: 1,
@@ -41,14 +48,23 @@ export default function Feedback() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setFeedbackData({
+      employeeId : employeeId,
+      hygieneStatus : hygieneStatus,
+      colleagueStatus : colleagueStatus,
+      juniorStatus : juniorStatus,
+      seniorStatus : seniorStatus,
+      staffStatus : staffStatus,
+      parkingStatus : parkingStatus,
+      washroomStatus : washroomStatus
+    })
     try {
-      const response = await fetch(`http://localhost:3000/api/feedback/123`, {
+      const response = await fetch(`http://localhost:3000/api/feedback/${123}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ feedBackDataObj }),
+        body: JSON.stringify(feedBackData),
       });
       
       if (response.ok) {
@@ -112,58 +128,93 @@ export default function Feedback() {
 
   return (
     <>
-    <ThemeProvider theme={darkGreentheme}>
+      <ThemeProvider theme={darkGreentheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-      <AppBar/>
-      <div className="main_div" style={containerStyle}>
-        <FormControl defaultValue="" required>
-          <Label>
-            Problems with Bathrooms/Washrooms(If none, write 'none'):
-          </Label>
-          <StyledInput1 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>
-            Any problems with your Hygiene of offices'(If none, write 'none'):
-          </Label>
-          <StyledInput3 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>Problems with your collegue/s(If none, write 'none'):</Label>
-          <StyledInput2 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>Problems with your collegue/s(If none, write 'none'):</Label>
-          <StyledInput3 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>Problems with your Junior/s(If none, write 'none'):</Label>
-          <StyledInput4 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>Problems with your Senior/s(If none, write 'none'):</Label>
-          <StyledInput5 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-        <br />
-        <FormControl defaultValue="" required>
-          <Label>Problems with Parking Space'(If none, write 'none'):</Label>
-          <StyledInput6 placeholder="Write your problems here" />
-          <HelperText />
-        </FormControl>
-      </div>
-      </Container>
+          <AppBar />
+          <div className="main_div" style={containerStyle}>
+            <FormControl defaultValue="" required>
+              <Label>
+                Problems with Bathrooms/Washrooms(If none, write 'none'):
+              </Label>
+              <StyledInput1
+                placeholder="Write your problems here"
+                value={washroomStatus}
+                onChange={(e) => {
+                  setWashroomStatus(e.target.value);
+                }}
+              />
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>
+                Any problems with your Hygiene of offices'(If none, write
+                'none'):
+              </Label>
+              <StyledInput3 placeholder="Write your problems here" 
+              value={hygieneStatus}
+              onChange={(e) => {
+                setHygieneStatus(e.target.value);
+              }}/>
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>
+                Problems with your collegue/s(If none, write 'none'):
+              </Label>
+              <StyledInput2 placeholder="Write your problems here"
+              value={colleagueStatus}
+              onChange={(e) => {
+                setColleagueStatus(e.target.value);
+              }} />
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>Problems with your Junior/s(If none, write 'none'):</Label>
+              <StyledInput4 placeholder="Write your problems here"
+              value={juniorStatus}
+              onChange={(e) => {
+                setJuniorStatus(e.target.value);
+              }}  />
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>Problems with your Senior/s(If none, write 'none'):</Label>
+              <StyledInput5 placeholder="Write your problems here"
+              value={seniorStatus}
+              onChange={(e) => {
+                setSeniorStatus(e.target.value);
+              }}  />
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>Problems with your Staff/s(If none, write 'none'):</Label>
+              <StyledInput5 placeholder="Write your problems here"
+              value={staffStatus}
+              onChange={(e) => {
+                setStaffStatus(e.target.value);
+              }}  />
+              <HelperText />
+            </FormControl>
+            <br />
+            <FormControl defaultValue="" required>
+              <Label>
+                Problems with Parking Space'(If none, write 'none'):
+              </Label>
+              <StyledInput6 placeholder="Write your problems here"
+              value={parkingStatus}
+              onChange={(e) => {
+                setParkingStatus(e.target.value);
+              }}  />
+              <HelperText />
+            </FormControl>
+          </div>
+        </Container>
       </ThemeProvider>
     </>
   );

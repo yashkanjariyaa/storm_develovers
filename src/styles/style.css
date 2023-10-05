@@ -10,9 +10,14 @@ body{
     background-repeat: no-repeat;
     background-position: top right;
     background-attachment: fixed;
-    height: 150vh;
-    
+    height: 100vh;
     position: relative;
     top : 0;
-    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.footerContainer{
+    position: absolute;
+    bottom: 0;
+    height: min-content;
+    width: 100vw;
 }
