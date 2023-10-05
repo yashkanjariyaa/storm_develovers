@@ -24,16 +24,11 @@ export default function Survey() {
   const [tenValue, setTenValue] = React.useState(4.5);
   const [elevenValue, setElevenValue] = React.useState(4.5);
   const [hover, setHover] = React.useState(-1);
+  const [answer, setAnswer] = useState('');
   const [surveyAnswers, setSurveyAnswers] = useState([]);
   const [rateAnswers, setRateAnswers] = useState([]);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const SurveyDataObj = {
-    employeeId: localStorage.getItem("employeeId"),
-    surveyAnswers: surveyAnswers,
-    rateAnswers: rateAnswers,
-  };
-
   const labels = {
     0.5: "Useless",
     1: "Useless+",
@@ -87,24 +82,33 @@ export default function Survey() {
       console.log(err);
     }
   }
-  check();
-  const handleSubmit = async (e) => {
+  React.useEffect(() => {
+    check();
+  }, []);
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    console.log('handling submit')
+    setRateAnswers({
+        tenvalue : tenValue,
+        elevenValue : elevenValue
+    });
+    const SurveyDataObj = {
+        employeeId: localStorage.getItem("userEmployeeId"),
+        surveyAnswers: surveyAnswers,
+        rateAnswers: rateAnswers,
+      };
+    console.log(SurveyDataObj);
     try {
-        setRateAnswers({
-            tenValue : tenValue,
-            elevenValue : elevenValue
-        })
-      const response = await fetch(`http://localhost:1337/api/survey`, {
+      const response = await fetch("http://localhost:1337/api/survey", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(SurveyDataObj),
       });
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
+      console.log(response);
+      if (response.status === 200) {
         const responseData = await response.json();
         console.log(responseData.message);
       } else {
@@ -113,7 +117,8 @@ export default function Survey() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+
   /*function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }*/
@@ -125,209 +130,211 @@ export default function Survey() {
           <AppBar />
         </Container>
       </ThemeProvider>
-      <div class="box">
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Were you provided with clear expectations for your tasks and goals
-          </FormLabel>
+      <div className="box">
+          <FormControl>
+        <form>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Were you provided with clear expectations for your tasks and goals
+            </FormLabel>
 
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 0);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Did you receive constructive feedback on your performance?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 1);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Do you feel comfortable providing feedback to your supervisor?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 2);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Are you excited to come to work each day?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 3);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Are you able to maintain a healthy work-life balance?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 4);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Did you have opportunities for skill development or training?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 5);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Do you feel like your team is aligned with the company's goals?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 6);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Do you feel like the company is transparent about its goals and
-            progress?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 7);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Do you feel like you have the opportunity to grow and develop your
-            career at the company?
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-            //value={temp}
-            onChange={(e) => {
-              addValueAtIndex(e.target.value, 8);
-            }}
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-          <p>
-            On a scale of 1-10 , how much would you rate your mood on an
-            active work day ?
-          </p>
-          <Box
-            sx={{
-              width: 200,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Rating
-              name="hover-feedback"
-              value={tenValue}
-              precision={0.5}
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
               onChange={(e) => {
-                setTenValue(e.target.value);
+                addValueAtIndex(e.target.value, 0);
               }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Did you receive constructive feedback on your performance?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 1);
               }}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            {/*tenValue !== null && (
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Do you feel comfortable providing feedback to your supervisor?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 2);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Are you excited to come to work each day?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 3);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Are you able to maintain a healthy work-life balance?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 4);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Did you have opportunities for skill development or training?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 5);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Do you feel like your team is aligned with the company's goals?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 6);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Do you feel like the company is transparent about its goals and
+              progress?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 7);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Do you feel like you have the opportunity to grow and develop your
+              career at the company?
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 8);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            <p>
+              On a scale of 1-10 , how much would you rate your mood on an
+              active work day ?
+            </p>
+            <Box
+              sx={{
+                width: 200,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Rating
+                name="hover-feedback"
+                value={parseFloat(tenValue)}
+                precision={0.5}
+                onChange={(e) => {
+                  setTenValue(e.target.value);
+                }}
+                onChangeActive={(event, newHover) => {
+                  setHover(newHover);
+                }}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+              />
+              {/*tenValue !== null && (
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : tenValue]}</Box>
                         )*/}
-          </Box>
+            </Box>
 
-          <p>
-            On a scale of 1-10, how satisfied are you with your work environment
-          </p>
-          <Box
-            sx={{
-              width: 200,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Rating
-              name="hover-feedback"
-              value={elevenValue}
-              precision={0.5}
-              onChange={(e) => {
-                setElevenValue(e.target.value);
+            <p>
+              On a scale of 1-10, how satisfied are you with your work
+              environment
+            </p>
+            <Box
+              sx={{
+                width: 200,
+                display: "flex",
+                alignItems: "center",
               }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            {/*elevenValue !== null && (`
+            >
+              <Rating
+                name="hover-feedback"
+                value={parseFloat(elevenValue)}
+                precision={0.5}
+                onChange={(e) => {
+                  setElevenValue(e.target.value);
+                }}
+                onChangeActive={(event, newHover) => {
+                  setHover(newHover);
+                }}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+              />
+              {/*elevenValue !== null && (`
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : elevenValue]}</Box>
                         )*/}
-
-            <Button variant="outlined" onClick={handleSubmit}>
-              Outlined
+            </Box>
+            <Button variant="outlined" type="submit" onClick={(e)=>{handleSubmit(e)}}>
+              Submit
             </Button>
-          </Box>
-        </FormControl>
+            </form>
+          </FormControl>
+        
         <Footer />
       </div>
     </>

@@ -2,3 +2,12 @@
 {
     padding:5%;
 }
+.container{
+    position: absolute;
+    top : 10%;
+    left : 10%;
+    width : max-content;
+    height: max-content;
+    background-color: black;
+    padding : 40px;
+}
