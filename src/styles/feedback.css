@@ -9,5 +9,8 @@
     width : max-content;
     height: max-content;
     background-color: black;
-    padding : 100px;
+    padding : 40px;
+}
+.submit{
+    margin-left: auto;
 }

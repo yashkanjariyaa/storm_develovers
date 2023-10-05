@@ -10,10 +10,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import ToggleButton from "@mui/material/ToggleButton";
 export default function Feedback() {
   const token = localStorage.getItem("token");
   const [text, setText] = useState("");
-  const employeeId = localStorage.getItem("employeeId");
+  const [selected, setSelected] = useState(false);
 
   /*const feedBackDataObj = {
     employeeId: 1,
@@ -28,6 +30,10 @@ export default function Feedback() {
 
   async function handleSubmit() {
     try {
+      let employeeId;
+      if(!selected){
+        employeeId = localStorage.getItem("userEmployeeId");
+      }
       console.log("function called");
       const response = await fetch("http://localhost:1337/api/feedback", {
         method: "POST",
@@ -35,16 +41,14 @@ export default function Feedback() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          employeeId : employeeId,
-          text : text,
-        })
+          employeeId: employeeId,
+          text: text,
+        }),
       });
       console.log(response);
       const responseData = await response.json();
-      if (responseData.status === 200) {
-        console.log(responseData.message);
-        setText("");
-      }
+      console.log(responseData.message);
+      setText("");
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +87,7 @@ export default function Feedback() {
   }
   React.useEffect(() => {
     check();
-  },[]);
+  }, []);
 
   //   {
   //     position: 'absolute',
@@ -116,17 +120,29 @@ export default function Feedback() {
               autoComplete="off"
             >
               <TextField
-                id="standard-basic"
-                label="Standard"
-                variant="standard"
+                id="outlined-multiline-flexible"
+                label="Multiline"
+                multiline
+                maxRows={5}
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);
                 }}
               />
-              <Button variant="outlined" onClick={handleSubmit}>
-                Outlined
+             <br></br>
+             <ToggleButton
+                value="check"
+                selected={selected}
+                onChange={() => {
+                  setSelected(!selected);
+                }}
+              >
+                <CheckIcon />
+              </ToggleButton>
+              <Button variant="outlined" onClick={handleSubmit} className="submit">
+                Submit Feedback
               </Button>
+              <p>Click on the check box to send anonymous response</p>
             </Box>
           </div>
         </Container>

@@ -24,7 +24,6 @@ export default function Survey() {
   const [tenValue, setTenValue] = React.useState(4.5);
   const [elevenValue, setElevenValue] = React.useState(4.5);
   const [hover, setHover] = React.useState(-1);
-  const [answer, setAnswer] = useState('');
   const [surveyAnswers, setSurveyAnswers] = useState([]);
   const [rateAnswers, setRateAnswers] = useState([]);
   const token = localStorage.getItem('token');
@@ -88,13 +87,14 @@ export default function Survey() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('handling submit');
+    console.log("handling submit");
     setRateAnswers({
       tenvalue: tenValue,
       elevenValue: elevenValue,
     });
     const SurveyDataObj = {
-      employeeId: localStorage.getItem('userEmployeeId'),
+      employeeEmail: localStorage.getItem("employeeEmail"),
+      employeeId: localStorage.getItem("userEmployeeId"),
       surveyAnswers: surveyAnswers,
       rateAnswers: rateAnswers,
     };
@@ -108,11 +108,10 @@ export default function Survey() {
         body: JSON.stringify(SurveyDataObj),
       });
       console.log(response);
-      if (response.status === 200) {
-        const responseData = await response.json();
-        console.log(responseData.message);
-      } else {
-        throw new Error('Error submitting survey');
+      const responseData = await response.json();
+      console.log(responseData.message);
+      if(responseData.status){
+        alert('Form already submitted' + ' '+ response.status);
       }
     } catch (error) {
       console.error(error);
@@ -128,17 +127,29 @@ export default function Survey() {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <AppBar />
-        </Container>
-      </ThemeProvider>
       <div className="box">
         <FormControl>
           <form>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Were you provided with clear expectations for your tasks and goals
+            </FormLabel>
             <div className="ques" >
               <FormLabel id="demo-radio-buttons-group-label">
                 Were you provided with clear expectations for your tasks and
                 goals
               </FormLabel>
 
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="Yes"
+              name="radio-buttons-group"
+              onChange={(e) => {
+                addValueAtIndex(e.target.value, 0);
+              }}
+            >
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="Yes"
@@ -167,9 +178,6 @@ export default function Survey() {
               <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
               <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
-            </div>
-
-            <div className="ques" >
             <FormLabel id="demo-radio-buttons-group-label">
               Do you feel comfortable providing feedback to your supervisor?
             </FormLabel>
@@ -353,10 +361,20 @@ export default function Survey() {
                         )*/}
             </Box>
             </div>
-          </form>
-        </FormControl>
-        <Footer />
-      </div>
-    </>
-  );
-}
+            <Button
+              variant="outlined"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              Submit
+            </Button>
+       </form>
+       </FormControl>
+       </div>
+       <Footer/>
+       </Container>
+       </ThemeProvider>
+       </>
+       );
+    }

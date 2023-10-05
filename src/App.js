@@ -1,15 +1,15 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/home.js';
-import NoPage from './pages/noPage.js';
-import SignIn from './pages/signIn.js';
-import SignUp from './pages/signUp.js';
-import DashBoard from './pages/dashboard.js';
-import Feedback from './pages/Feedback.js';
-import EmpReview from './pages/EmpReview.js';
-import Survey from './pages/Survey.js';
-import Report from './pages/Report.js';
-import FormBuilder from './pages/FormBuilder';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home.js";
+import NoPage from "./pages/noPage.js";
+import SignIn from "./pages/signIn.js";
+import SignUp from "./pages/signUp.js";
+import DashBoard from "./pages/dashboard.js";
+import Feedback from "./pages/Feedback.js";
+import EmpReview from "./pages/EmpReview.js";
+import Survey from "./pages/Survey.js";
+import Report from "./pages/Report.js";
+import FormBuilder from "./pages/FormBuilder";
 
 function App() {
   return (
