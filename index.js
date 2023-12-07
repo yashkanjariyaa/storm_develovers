@@ -8,7 +8,7 @@ app.use(express.json());
 
 const port = 1337;
 
-const { signIn, signUp, check } = require("./controllers/authorization.js");
+const { signIn, signUp, check, search } = require("./controllers/controller.js");
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -37,6 +37,8 @@ app.post("/api/login", signIn);
 app.post("/api/register", signUp);
 
 app.post("/api/check", check);
+
+app.post("/api/search", search);
 
 app.listen(port, () => {
   console.log("App is listening on " + port);

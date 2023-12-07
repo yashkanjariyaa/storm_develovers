@@ -15,6 +15,11 @@ const signUp = async (req, res) => {
       email: req.body.email,
       password: cryptedPassword,
     });
+    console.log({
+      name: req.body.name,
+      email: req.body.email,
+      password: cryptedPassword,
+    })
     res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
@@ -27,8 +32,9 @@ const signIn = async (req, res) => {
     const user = await userSchema.findOne({
       email: req.body.email,
     });
+    console.log(user);
     if (!user) {
-      return { status: "error", error: "Invalid Login" };
+      return res.json({ status: "error", error: "Invalid Login" });
     }
     const isPasswordValid = await bcrypt.compare(
       req.body.password,
@@ -60,8 +66,33 @@ const check = async (req, res) => {
     res.json({ status: "error", error: err });
   }
 };
+
+const search = async (req, res) => {
+  try {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ error: 'Search query is required.' });
+    }
+
+    // Replace 'YOUR_API_KEY' with an actual API key from a movie database service (e.g., OMDB API)
+    const apiKey = '7dc4451b';
+    const apiUrl = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
+
+    const response = await axios.get(apiUrl);
+    const data = response.data;
+
+    if (data.Response === 'False') {
+      return res.status(404).json({ error: 'No movies found.' });
+    }
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+}
 module.exports = {
   signIn,
   signUp,
   check,
+  search,
 };
